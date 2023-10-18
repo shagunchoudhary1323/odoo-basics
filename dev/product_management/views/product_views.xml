@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+
+        <!--action of products menu-->
+        <record id="action_products" model="ir.actions.act_window">
+            <field name="name">Products</field>
+            <field name="res_model">product.management.product</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_id" ref="product_management.view_product_tree"/>
+        </record>
+
+       <!--creating menus-->
+        <menuitem id="menu_product_management" name="Product Management" sequence="10" web_icon="product_management,static/description/icon.png"/>
+        <menuitem id="menu_products" name="Products" parent="menu_product_management" action="action_products" sequence="10"/>
+
+    <!-- TREE View for Products -->
+    <record id="view_product_tree" model="ir.ui.view">
+        <field name="name">product.management.product.tree</field>
+        <field name="model">product.management.product</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="id" />
+                <field name="name"/>
+                <field name="description"/>
+                <field name="price"/>
+                <field name="category_id"/>
+                <field name="image" widget="image" options="{'zoom': true, 'size': (50, 50)}" string="Image"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- FORM View for Products -->
+    <record id="view_product_form" model="ir.ui.view">
+        <field name="name">product.management.product.form</field>
+        <field name="model">product.management.product</field>
+        <field name="arch" type="xml">
+            <form>
+                 <div class="oe_title">
+                    <h1><field name="name" widget="char" options='{"no_open": True}'/></h1>
+                 </div>
+                  <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="price"/>
+                    </group>
+                      <group>
+                          <field name="category_id"/>
+                          <field name="image" widget="image" options="{'zoom': true, 'size': (90, 80)}" string="Product Image"/>
+                      </group>
+                </sheet>
+
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+</odoo>

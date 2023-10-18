@@ -1,0 +1,20 @@
+{
+    'name': 'Hospital Management System',
+    'version': '12.0.1.0.0',
+    'category': 'Hospital module',
+    'summary': 'Hospital module for managing patients and appointments',
+    'sequence': '10',
+    'license': 'AGPL-3',
+    'author': 'Odoo Mates',
+    'maintainer': 'Odoo Mates',
+    'website': 'odoomates.com',
+    'depends':['mail','sale'],
+    'data' : ['security/ir.model.access.csv',
+              'data/sequence.xml',
+              'views/patient.xml',
+              'data/mail_template.xml'],
+
+    'demo' : [],
+     'installable': True,
+    'application': True,
+}

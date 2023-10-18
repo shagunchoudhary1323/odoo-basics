@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+        <!--FORM view of the patient model-->
+    <record id="patient_form" model="ir.ui.view">
+        <field name="name">hospital.patient.form</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml" >
+            <form>
+                <header>
+                    <field name="active" widget="statusbar"/>
+                    <button string="Confirm" name="act_confirm" class="oe_highlight" type="object" />
+                    <button string="Cancel" name="act_confirm" class="oe_highlight" type="object" />
+                </header>
+
+                <sheet>
+                    <div class="oe_title">
+                        <h1> <field name="ref" readonly="1"/> </h1>
+                    </div>
+                    <group>
+                        <field name="patient_name"/>
+                        <field name="patient_age"/>
+                        <field name="gender"/>
+                    </group>
+                     <group>
+                         <field name="capitalized_name"/>
+                         <field name="notes"/>
+                         <field name="patient_image"/>
+                    </group>
+                </sheet>
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+
+      <!--TREE view of the patient model-->
+    <record id="patient_tree" model="ir.ui.view">
+        <field name="name">hospital.patient.tree</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <tree string="Patients">
+                <field name="ref"/>
+                <field name="patient_name"/>
+                <field name="patient_age"/>
+                <field name="gender"/>
+                <field name="notes"/>
+
+            </tree>
+        </field>
+     </record>
+
+      <!--SEARCH view of the patient model-->
+    <record id="patient_search" model="ir.ui.view">
+        <field name="name">hospital.patient.search</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="ref"/>
+                <field name="patient_name" />
+                <field name="patient_age"/>
+                <field name="gender"/>
+
+                <filter name="filter_by_male" string="Male" domain="[('gender', '=', 'male')]"/>
+                <filter name="filter_by_female" string="Female" domain="[('gender', '=', 'female')]"/>
+                <separator/>
+                <filter name="filter_by_child" string="Child" domain="[('is_child', '=', 'True')]"/>
+
+                <field name="is_child"/>
+                <field name="notes"/>
+                <field name="capitalized_name"/>
+            </search>
+        </field>
+     </record>
+
+
+      <!--action of the patients menu-->
+    <record id="patient_action" model="ir.actions.act_window">
+        <field name="name">Patients</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.patient</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+
+
+    <!--creating menus-->
+    <menuitem id="hospital_root" name="Hospital Menu" sequence="1" web_icon="om_hospital,static/description/icon.png"/>
+    <menuitem id="hospital_patient" name="Patients Menu" parent="hospital_root"  sequence="10"/>
+    
+
+</odoo>

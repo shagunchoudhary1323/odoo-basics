@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <!-- Product List Report -->
+        <report id="report_product_list" string="Product List" model="product.management.product" report_type="qweb-pdf">
+            <template id="report_product_list_template" inherit_id="web.report_layout">
+                <!-- Add your report content here -->
+            </template>
+        </report>
+
+        <!-- Category Summary Report -->
+        <report id="report_category_summary" string="Category Summary" model="product.management.category" report_type="qweb-pdf">
+            <template id="report_category_summary_template" inherit_id="web.report_layout">
+                <!-- Add your report content here -->
+            </template>
+        </report>
+    </data>
+</odoo>

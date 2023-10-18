@@ -1,0 +1,20 @@
+{
+    'name': 'Product Management Module',
+    'version': '1.0',
+    'summary': 'Custom module for product management',
+    'sequence': '10',
+    'license': 'AGPL-3',
+     'category': 'Product module',
+    'author': 'Shagun',
+    'maintainer': 'Shagun',
+    'depends': ['base','mail'],
+    'data': [
+    'security/ir.model.access.csv',
+        'data/sequence.xml',
+        'views/product_views.xml',
+],
+'demo' : [],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+}
