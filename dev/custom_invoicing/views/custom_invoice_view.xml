@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <data>
+        <record id="view_custom_invoice_form" model="ir.ui.view">
+            <field name="name">custom_invoicing.invoice.form</field>
+            <field name="model">custom_invoicing.invoice</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_send_invoice" string="Send Invoice" type="object" states="draft" class="oe_highlight"/>
+                        <button name="action_mark_paid" string="Mark Paid" type="object" states="sent" class="oe_highlight"/>
+                    </header>
+                    <group>
+                        <group>
+                            <field name="customer_id"/>
+                            <field name="order_number"/>
+                            <field name="due_date"/>
+                            <field name="reference"/>
+                        </group>
+                         <group>
+                              <field name="product_line_ids"/>
+                         </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

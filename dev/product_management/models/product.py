@@ -6,20 +6,28 @@ class Product(models.Model):
     _description = 'Product Management'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    id = fields.Char(string='ID', required=True,track_visibility="True", copy=False, readonly=True,
-                             index=True, default=lambda self: _('New'))
-    name = fields.Char(string='Product Name',track_visibility="True", required=True)
+    sequence = fields.Char(string='Sequence',default=lambda self: ('New'))
+    name = fields.Char(string='Product Name',required=True ,track_visibility="True")
     description = fields.Text(track_visibility="True",string='Description')
     price = fields.Float(string='Price',track_visibility="True", digits=(10, 2))
     category_id = fields.Many2one('product.management.category', track_visibility="True",string='Category')
     image = fields.Binary(string='Product Image', attachment=True,track_visibility="True")
 
+    def action_product_list(self):
+        print("hii,hello",self.read()[0])
+        data = {'docs': self}
+        d={
+            "model":"product.management.product",
+            'form': self.read()[0]
+        }
+        print("d=",d)
 
-@api.model
-def create(self, vals):
-    if 'id' not in vals:
-        vals['id'] = self.env['ir.sequence'].next_by_code('product.management.product') or _('New')
-        return super(Product, self).create(vals)
+        return self.env['report'].get_action(self, 'product_management.report_product_list', data=data)
+
+    def create(self, vals):
+        if 'sequence' not in vals:
+            vals['sequence'] = self.env['ir.sequence'].next_by_code('product.management.product') or ('New')
+            return super(Product, self).create(vals)
 
 @api.constrains('price')
 def _check_non_negative_price(self):

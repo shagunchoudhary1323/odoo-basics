@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_product_list_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <h2><t t-esc="o.name"/></h2>
+                        <p><t t-esc="o.description"/></p>
+                        <p><t t-esc="o.price"/></p>
+                        <p><t t-esc="o.category_id.name"/></p>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

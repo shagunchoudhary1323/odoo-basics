@@ -12,6 +12,7 @@
     'security/ir.model.access.csv',
         'data/sequence.xml',
         'views/product_views.xml',
+        'reports/report.xml',
 ],
 'demo' : [],
     'installable': True,

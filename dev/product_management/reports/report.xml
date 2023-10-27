@@ -1,16 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <data>
         <!-- Product List Report -->
-        <report id="report_product_list" string="Product List" model="product.management.product" report_type="qweb-pdf">
-            <template id="report_product_list_template" inherit_id="web.report_layout">
-                <!-- Add your report content here -->
-            </template>
-        </report>
+        <template id="report_product_list_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <h2>
+                            <t t-esc="o.name"/>
+                        </h2>
+                        <p>
+                            <t t-esc="o.description"/>
+                        </p>
+                        <p>
+                            <t t-esc="o.price"/>
+                        </p>
+                        <p>
+                            <t t-esc="o.category_id.name"/>
+                        </p>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <record id="report_product_list" string="Product List" model="ir.actions.report">
+            <field name="name">Product List Report</field>
+            <field name="model">product.management.product</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">product_management.report_product_list_template</field>
+            <field name="report_file">product_management.report_product_list_template</field>
+            <field name="print_report_name">'ProductList-Report'</field>
+            <field name="binding_type">report</field>
+            <field name="binding_model_id" ref="product_management.model_product_management_product"/>
+        </record>
 
         <!-- Category Summary Report -->
-        <report id="report_category_summary" string="Category Summary" model="product.management.category" report_type="qweb-pdf">
+        <report id="report_category_summary" string="Category Summary" model="product.management.category"
+                report_type="qweb-pdf">
             <template id="report_category_summary_template" inherit_id="web.report_layout">
-                <!-- Add your report content here -->
             </template>
         </report>
     </data>
